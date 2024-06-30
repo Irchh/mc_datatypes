@@ -8,11 +8,11 @@ pub struct VarInt {
 
 impl VarInt {
     pub fn new(value: i32) -> Self {
-        let mut num = value as u64;
+        let mut num = value as u32;
         let mut data = vec![];
         loop {
-            if num >= 0x80u64 {
-                let b = num as u8 & (!0x80);
+            if num >= 0x80u32 {
+                let b = num as u8 & 0x7F;
                 data.push(b|0x80);
                 num = num >> 7;
             } else {
